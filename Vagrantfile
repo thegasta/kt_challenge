@@ -71,4 +71,9 @@ Vagrant.configure("2") do |config|
   #   apt-get update
   #   apt-get install -y apache2
   # SHELL
+  
+  config.vm.define "node-1" do |node|
+	  node.vm.provision "shell",
+	    inline: "echo hello from node 1"
+  end
 end
