@@ -73,7 +73,7 @@ Vagrant.configure("2") do |config|
   # SHELL
   
   config.vm.define "node-1" do |node|
-	  node.vm.provision "shell",
-	    inline: "echo hello from node 1"
+    node.vm.provision "shell",
+      inline: "echo hello from node 1"
   end
 end
