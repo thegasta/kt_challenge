@@ -20,3 +20,5 @@
         fstype: xfs
         resizefs: true
       when: "expanded is failed"
+  roles: 
+    - geerlingguy.docker
