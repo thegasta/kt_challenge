@@ -76,4 +76,11 @@ Vagrant.configure("2") do |config|
     node.vm.provision "shell",
       inline: "echo hello from node 1"
   end
+  
+  config.vm.provision "ansible_local" do |ansible|
+    ansible.limit = 'all'
+    ansible.inventory_path = 'hosts'
+    ansible.playbook = 'challenge.yml'
+  end
+
 end
