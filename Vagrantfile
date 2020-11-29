@@ -76,6 +76,7 @@ Vagrant.configure("2") do |config|
     node.vm.provision "shell",
       inline: "echo hello from node 1"
   end
+  config.disksize.size = '42GB'
   
   config.vm.provision "ansible_local" do |ansible|
     ansible.limit = 'all'

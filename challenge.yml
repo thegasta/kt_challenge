@@ -3,3 +3,20 @@
   hosts: localhost
   connection: local
   become: true
+  tasks: 
+    - 
+      name: "Assert docker partition is 40GB"
+      assert:
+        that: "item.mount != '/' or item.size_total >= 42949672960"
+        fail_msg: "Partition must be >= 40GB"
+        success_msg: "Partition is >= 40GB"
+      ignore_errors: true
+      register: expanded
+      with_items: "{{ansible_mounts}}"
+    - 
+      name: "Extend the FS"
+      filesystem: 
+        dev: /dev/sda1
+        fstype: xfs
+        resizefs: true
+      when: "expanded is failed"
