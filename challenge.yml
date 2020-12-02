@@ -43,7 +43,7 @@
     - 
       name: "Extend the FS"
       filesystem: 
-        dev: /dev/sda1
+        dev: /dev/sda2
         fstype: xfs
         resizefs: true
       when: "expanded is failed"
