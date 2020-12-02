@@ -18,6 +18,19 @@
         dev: /dev/sda2
         fstype: xfs
     - 
+      name: "Create docker directory if it does not exist"
+      file:
+        path: /home/docker/data
+        state: directory
+        mode: '0755'
+    - 
+      name: Mount partition
+      mount:
+        path: /home/docker
+        src: /dev/sda2
+        fstype: xfs
+        state: mounted
+    - 
       name: "Assert docker partition is 40GB"
       assert:
         that: "item.mount != '/' or item.size_total >= 42949672960"
