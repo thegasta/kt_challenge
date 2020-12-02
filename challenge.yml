@@ -5,6 +5,19 @@
   become: true
   tasks: 
     - 
+      name: "Check/create partition for docker"
+      parted:
+        device: /dev/sda
+        number: 2
+        part_start: 41943040KiB
+        state: present
+      register: sdb_info
+    - 
+      name: "Check/create filesystem"
+      filesystem:
+        dev: /dev/sda2
+        fstype: xfs
+    - 
       name: "Assert docker partition is 40GB"
       assert:
         that: "item.mount != '/' or item.size_total >= 42949672960"
