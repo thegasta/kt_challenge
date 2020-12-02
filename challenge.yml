@@ -47,5 +47,10 @@
         fstype: xfs
         resizefs: true
       when: "expanded is failed"
-  roles: 
-    - geerlingguy.docker
+    -
+      name: Include the example role
+      include_role:
+        name: lean_delivery.docker
+      vars:
+        daemon_conf:
+          data-root: /home/docker/data
