@@ -7,6 +7,10 @@ jobs:
     # Important: This sets up your GITHUB_WORKSPACE environment variable
     - uses: actions/checkout@v2
     - name: Lint Ansible Playbook
-      uses: ansible/ansible-lint-action@v4.1.0.post0
-      env:
-        ACTION_PLAYBOOK_NAME: "challenge.yml"
+      uses: ansible/ansible-lint-action@master
+      with:
+        targets: |
+            challenge.yml
+            requirements.yml
+        override-deps: |
+          ansible==2.9
