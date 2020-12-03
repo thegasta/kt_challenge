@@ -33,13 +33,13 @@
     - 
       name: "Assert docker partition is 40GB"
       assert:
-        that: "mount.size_total >= 42949672960"
+        that: "item.size_total >= 42949672960"
         fail_msg: "Partition must be >= 40GB"
         success_msg: "Partition is >= 40GB"
       ignore_errors: true
       register: expanded
-      vars:
-        mount: "{{ ansible_mounts | selectattr('mount','equalto','/home/docker') | list | first }}"
+      when: item.mount == '/home/docker'
+      with_items: '{{ ansible_mounts }}'
     - 
       name: "Extend the FS"
       filesystem: 
