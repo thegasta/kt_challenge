@@ -72,9 +72,11 @@ Vagrant.configure("2") do |config|
   #   apt-get install -y apache2
   # SHELL
   
-  config.vm.define "node-1" do |node|
-    node.vm.provision "shell",
-      inline: "echo hello from node 1"
+  (1..2).each do |i|
+    config.vm.define "node-#{i}" do |node|
+      node.vm.provision "shell",
+        inline: "echo hello from node #{i}"
+    end
   end
   config.disksize.size = '81GB'
   
